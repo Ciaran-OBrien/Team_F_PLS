@@ -5,30 +5,23 @@
  */
 package Delivery;
 
+import java.time.LocalTime;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
  * @author jan
  */
 public class DeliveryTest {
-    
-    public DeliveryTest() {
-    }
 
-    /**
-     * Test of getID method, of class Delivery.
-     */
-    @Test
-    public void testGetID() {
-        System.out.println("getID");
-        Delivery instance = null;
-        int expResult = 0;
-        int result = instance.getID();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    Delivery instance;
+
+    @Before
+    public void setUp() {
+        // When implementation is ready:
+        // instance = new Delivery(...);
     }
 
     /**
@@ -37,51 +30,86 @@ public class DeliveryTest {
     @Test
     public void testSetID() {
         System.out.println("setID");
-        int DelivertId = 0;
+        int DelivertId = Integer.MAX_VALUE;
         Delivery instance = null;
         instance.setID(DelivertId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(DelivertId, instance.getID());
     }
 
     /**
-     * Test of getDate method, of class Delivery.
+     * Test of setID method, of class Delivery.
      */
-    @Test
-    public void testGetDate() {
-        System.out.println("getDate");
-        Delivery instance = null;
-        String expResult = "";
-        String result = instance.getDate();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetIDWithNegativeValue() {
+        System.out.println("setID");
+        int DelivertId = -1;
+        instance.setID(DelivertId);
     }
 
     /**
-     * Test of setDate method, of class Delivery.
+     * Test of setDate method, of class Delivery. Like suggested in
+     * Deliver.java: "HH:mm dd-MM-yy"
      */
     @Test
     public void testSetDate() {
         System.out.println("setDate");
-        String dateformat = "";
+        String date = "07:28 21.10.2015";
         Delivery instance = null;
-        instance.setDate(dateformat);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(date, instance.getDate());
     }
 
     /**
-     * Test of toString method, of class Delivery.
+     * Test of setDate method, of class Delivery. Like suggested in
+     * Deliver.java: "HH:mm dd-MM-yy"
      */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Delivery instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDateWithMalformedDateString() {
+        System.out.println("setDate");
+        String date = "That day after Yesterday morning or so.";
+        instance.setDate(date);
+    }
+
+    /**
+     * Test of setDate method, of class Delivery. Like suggested in
+     * Deliver.java: "HH:mm dd-MM-yy"
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDateWithIllegalMinute() {
+        System.out.println("setDate");
+        String date = "08:61 01.04.2017";
+        instance.setDate(date);
+    }
+    
+    /**
+     * Test of setDate method, of class Delivery. Like suggested in
+     * Deliver.java: "HH:mm dd-MM-yy"
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDateWithIllegalHour() {
+        System.out.println("setDate");
+        String date = "25:13 01.04.2017";
+        instance.setDate(date);
+    }
+
+    /**
+     * Test of setDate method, of class Delivery. Like suggested in
+     * Deliver.java: "HH:mm dd-MM-yy"
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDateWithNonExistentDay() {
+        System.out.println("setDate");
+        String date = "12:12 31.11.2017";
+        instance.setDate(date);
+    }
+
+    /**
+     * Test of setDate method, of class Delivery. Like suggested in
+     * Deliver.java: "HH:mm dd-MM-yy"
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDateWithWrongSymbols() {
+        System.out.println("setDate");
+        String date = "12:12 O1.II.2017";
+        instance.setDate(date);
+    }
 }

@@ -14,7 +14,10 @@ import static org.junit.Assert.*;
  */
 public class CourierTest {
     
-    public CourierTest() {
+    Courier instance;
+    
+    public void setUp(){
+        instance = new Courier();
     }
 
     /**
@@ -23,50 +26,58 @@ public class CourierTest {
     @Test
     public void testSetName() {
         System.out.println("setName");
-        Courier instance = new Courier();
-        instance.setName();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getName method, of class Courier.
-     */
-    @Test
-    public void testGetName() {
-        System.out.println("getName");
-        Courier instance = new Courier();
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setAddres method, of class Courier.
-     */
-    @Test
-    public void testSetAddres() {
-        System.out.println("setAddres");
-        Courier instance = new Courier();
-        instance.setAddres();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAddress method, of class Courier.
-     */
-    @Test
-    public void testGetAddress() {
-        System.out.println("getAddress");
-        Courier instance = new Courier();
-        String expResult = "";
-        String result = instance.getAddress();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String name = "Peter Venkman";
+        instance.setName(name);
+        assertEquals(name, instance.getName());
     }
     
+    /**
+     * Test of setName method, of class Courier.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNameWithSurOrForenameOnly() {
+        System.out.println("testSetNameOnlySurOrForname");
+        String name = "Rocket";
+        instance.setName(name);
+    }
+    
+    /**
+     * Test of setName method, of class Courier.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNameWithLowerCaseForename() {
+        System.out.println("testSetNameWithLowerCaseForename");
+        String name = "raymond Stanz";
+        instance.setName(name);
+    }
+    
+    /**
+     * Test of setName method, of class Courier.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNameWithLowerCaseSurname() {
+        System.out.println("testSetNameWithLowerCaseSurname");
+        String name = "Egon spengler";
+        instance.setName(name);
+    }
+    
+    /**
+     * Test of setName method, of class Courier.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNameWithCamelCaseSurname() {
+        System.out.println("testSetNameWithCamelCaseSurname");
+        String name = "Max MusterMann";
+        instance.setName(name);
+    }
+    
+    /**
+     * Test of setName method, of class Courier.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNameWithCamelCaseForename() {
+        System.out.println("testSetNameWithCamelCaseForename");
+        String name = "LeVar Burton";  // Sorry, no Stagenames allowed.
+        instance.setName(name);
+    }
 }
