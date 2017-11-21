@@ -8,7 +8,7 @@ package Delivery;
  *
  * @authors Luke & Tom
  */
-public abstract class Order implements IComponentInterface
+public abstract class Order
 {
     private int ParcelId=0;
     private int CourierId=0;
