@@ -12,6 +12,7 @@ public abstract class Order implements IComponentInterface
 {
     private int ParcelId=0;
     private int CourierId=0;
+    private int OrderId = 0 ;
     private String Status;
     
     /**
@@ -79,6 +80,7 @@ public abstract class Order implements IComponentInterface
         this.ParcelId=ParcelId;
         this.CourierId=CourierId;
         this.Status=Status;
+        this.OrderId = OrderId ++ ;
     }
     
     /**
