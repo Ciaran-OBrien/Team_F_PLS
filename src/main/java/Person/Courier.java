@@ -8,7 +8,7 @@ package Person;
  *
  * @author Lynn_Ngx
  */
-public abstract class Courier implements IPerson {
+public abstract class Courier {
     
     public int CourierId = 0 ;
     
