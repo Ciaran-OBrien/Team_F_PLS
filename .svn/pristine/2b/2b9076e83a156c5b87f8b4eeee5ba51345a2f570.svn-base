@@ -1,0 +1,60 @@
+/*
+ * Author: Ciarán O'Brien
+ * Lecture: Bennard Humm
+ */
+package EntityManager;
+
+import Status.*;
+import Delivery.Order;
+import java.util.HashMap;
+
+/**
+ *
+ * @author Ciarán
+ */
+public class OrderManager {
+    
+    HashMap<Long,Order> ordersToGo;
+    
+    Status Status;
+
+    public OrderManager() {
+        this.ordersToGo = new HashMap();
+    }
+    
+    
+    public boolean createOrder(Order newOrder){
+        if(ordersToGo!=null){
+            ordersToGo.put(Long.valueOf(newOrder.getID()), newOrder);
+            return true;
+        }
+        return false;
+    }
+    
+    public Order readOrder (long orderID){
+        return ordersToGo.get(orderID);       
+    }    
+    public boolean updateOrder(Status update){
+        switch(update){
+            case Registered:
+                Status = Status.CompleteAndDispatched;
+                return true;
+            case CompleteAndDispatched:
+                Status = Status.Intransit;
+                return true;
+            case Intransit:
+                Status = Status.Delievered;
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean destroyOrder(long orderID){
+        if(ordersToGo.containsKey(orderID)){
+            ordersToGo.remove(orderID);
+            return true;
+        }
+        return false;
+    }
+    
+}

@@ -1,0 +1,14 @@
+/*
+ * Author: Ciarán O'Brien
+ * Lecture: Bennard Humm
+ */
+package Status;
+
+/**
+ *
+ * @author Ciaran
+ */
+public enum CustomerStatus{
+    Sender,
+    Receiver
+}

@@ -1,0 +1,51 @@
+/*
+ * Authors: Ciarán O'Brien
+ * Lecture: Bennard Humm
+ */
+package Person;
+
+/**
+ *
+ * @authors Ciaran
+ */
+public class Customer implements IPerson{
+
+    private String Name;
+    private String Address;
+    /**
+     * This method will set the name of the customer
+     * @param customerName
+     */
+    @Override
+    public void setName(String customerName) {
+        this.Name = customerName;
+    }
+
+    /**
+     * This method will retrieve the customers name
+     * @return string Customer name
+     */
+    @Override
+    public String getName() {
+        return Name;
+    }
+
+    /**
+     * This method will set the customers address
+     * @param customerAddress
+     */
+    @Override
+    public void setAddres(String customerAddress) {
+        this.Address = customerAddress;
+    }
+    /**
+     * This method will retrieve the address of the customer
+     * @return string Customer address
+     */
+
+    @Override
+    public String getAddress() {
+        return Address;
+    }
+    
+}
