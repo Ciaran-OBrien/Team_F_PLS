@@ -8,7 +8,7 @@ package Person;
  *
  * @authors 
  */
-public class Customer implements IPerson{
+public class Customer {
 
     public static long ID = 1;
     private String Name;
