@@ -13,7 +13,7 @@ import java.util.Date;
  * @authors Luke & Tom
  */
 
-public abstract class Delivery implements IComponentInterface
+public abstract class Delivery
 {
     private int DeliveryId = 0;
     
