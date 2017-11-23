@@ -9,12 +9,14 @@ package Person;
  *
  * @author Lynn_Ngx
  */
-public abstract class Courier  {
+public class Courier extends AbstractPerson{
     
-    public int CourierId = 0 ;
+    public Courier(long ID, String Name, String Address) {
+        super(ID, Name, Address);
+    }  
     
-    public int setCourierId(int CourierId){
-        this.CourierId = CourierId ++ ;
-        return CourierId ;
+    @Override
+    public String toString(){
+        return "";
     }
 }

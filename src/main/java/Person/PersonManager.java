@@ -17,41 +17,42 @@ public class PersonManager {
     
     //while()
     
-    Map<Long,Customer> cust;
+    Map<Long,AbstractPerson> persons;
     
     public PersonManager(){
-        this.cust = new HashMap();
+        this.persons = new HashMap();
     }
         
     /**
      *
-     * @param newCustomer
+     * @param newPerson
      * @return
      */
-    public boolean createCustomer(Customer newCustomer){
-        if(cust!=null){
-            cust.put(Customer.ID, newCustomer);
-            Customer.ID++;
-            return true;
+    public boolean createPerson(AbstractPerson newPerson) {
+        if (newPerson.getStatus() == PersonStatus.SENDER) {
+            if (persons != null) {
+                persons.put(newPerson.getID(), newPerson);
+                return true;
+            }
         }
         return false;
     }
     
-    public Customer readOrder (long ID){
-        return cust.get(ID);       
+    public AbstractPerson findPersonByID (long ID){
+        return persons.get(ID);       
     }  
     
-    public boolean updateCustomer(Customer customer){
-        if(cust.containsKey(Customer.ID)){
-            cust.put(Customer.ID, customer);
+    public boolean updatePerson(AbstractPerson newPerson){
+        if(persons.containsKey(newPerson.getID())){
+            persons.put(newPerson.getID(), newPerson);
             return true;
         }
         return false;
     }
     
-    public boolean destroyCustomer(long ID){
-        if(cust.containsKey(ID)){
-            cust.remove(ID);
+    public boolean destroyPerson(long ID){
+        if(persons.containsKey(ID)){
+            persons.remove(ID);
             return true;
         }
         return false;

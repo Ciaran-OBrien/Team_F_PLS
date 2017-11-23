@@ -40,7 +40,7 @@ public class OrderManager {
      * @param orderID
      * @return Order from id passed
      */
-    public Order readOrder (long orderID){
+    public Order findOrderByID (long orderID){
         return ordersToGo.get(orderID);       
     }    
     

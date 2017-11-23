@@ -9,69 +9,16 @@ package Person;
  * @authors 
  */
 
-public class Customer{
+public class Customer extends AbstractPerson{
 
-
-    public static long ID = 1;
-    private String Name;
-    private String Address;
-    
-    public Customer(Long ID, String Name, String address) {
-        this.ID = ID;
-        this.Name = Name;
-        this.Address = Address;
-    }
-    
-    /**
-     * This method will set the name of the customer
-     * @param customerID
-     */
-    public void setID(Long customerID) {
-        this.ID = customerID;
+    public Customer(long ID, String Name, String Address) {
+        super(ID, Name, Address);
     }
 
-    /**
-     * This method will retrieve the customers ID
-     * @return Long Customer ID
-     */
-    public Long getID() {
-        return ID;
-    }
-    
-    /**
-     * This method will set the name of the customer
-     * @param customerName
-     */
-     
-    public void setName(String customerName) {
-        this.Name = customerName;
+    @Override
+    public String toString() {
+        return "";
     }
 
-    /**
-     * This method will retrieve the customers name
-     * @return string Customer name
-     */
-     
-    public String getName() {
-        return Name;
-    }
-
-    /**
-     * This method will set the customers address
-     * @param customerAddress
-     */
-     
-    public void setAddres(String customerAddress) {
-        this.Address = customerAddress;
-    }
-    /**
-     * This method will retrieve the address of the customer
-     * @return string Customer address
-     */
-
-     
-    public String getAddress() {
-        return Address;
-    }
     
 }
