@@ -4,35 +4,32 @@
  */
 package Delivery;
 
-import Status.*;
-import Delivery.Order;
-
- /*
+/**
+ *
  * @authors Luke & Tom
  */
-public abstract class Order
+public abstract class Order implements IComponentInterface
 {
     private int ParcelId=0;
     private int CourierId=0;
-    private int OrderId = 0 ;
-    OrderStatus Status;
+    private String Status;
     
     /**
     * This method will return the parcel ID
     * @return int This is the parcel ID
     */
-    public int getOrderId()
+    public int ParceID()
     {
-        return OrderId; 
+        return ParcelId; 
     }
     
      /**
      * This method will set the parcel ID previously obtained from the last method
-     * @param OrderId
+     * @param ParcelId
      */
-    public void setOrderID(int OrderId)
+    public void setParceID(int ParcelId)
     {
-        this.OrderId=OrderId;
+        this.ParcelId=ParcelId;
     }
     
     /**
@@ -57,8 +54,7 @@ public abstract class Order
     * This will retrieve the status of the parcel
     * @return string The status of the parcel
     */
-    public OrderStatus getStatus()
-
+    public String getStatus()
     {
         return Status;
     }
@@ -67,9 +63,7 @@ public abstract class Order
     * This will set the status of the parcel to the one just obtained
     * @param Status
     */
-
-    public void setStatus(OrderStatus Status)
-
+    public void setStatus(String Status)
     {
         this.Status=Status;
     }
@@ -80,9 +74,7 @@ public abstract class Order
      * @param CourierId
      * @param Status
     */
-
-    public Order(int ParcelId,int CourierId,OrderStatus Status)
-
+    public Order(int ParcelId,int CourierId,String Status)
     {
         this.ParcelId=ParcelId;
         this.CourierId=CourierId;

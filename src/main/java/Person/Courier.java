@@ -1,5 +1,6 @@
 /*
  * Author: Shona
+ * Author: Lynn
  * Lecture: Bennard Humm
  */
 package Person;

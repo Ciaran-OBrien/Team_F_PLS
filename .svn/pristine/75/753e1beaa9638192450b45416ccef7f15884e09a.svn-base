@@ -6,18 +6,17 @@ package Delivery;
 import java.io.*; 
 import java.text.*; 
 import java.util.*;
-import java.util.Date;
 
 /**
  *
  * @authors Luke & Tom
  */
 
-public abstract class Delivery
+public abstract class Delivery implements IComponentInterface
 {
     private int DeliveryId = 0;
     
-    String timeStamp = new SimpleDateFormat("HH:mm dd-MM-yy").format(new Date());
+    private String dateformat = "HH:mm dd-MM-yy ";
     /**
     * This method will retrieve the Delivery ID
     * @return int This will be the ID number
@@ -42,7 +41,7 @@ public abstract class Delivery
     */
     public String getDate()
     {
-        return timeStamp;
+        return dateformat;
     }
     
     /**
@@ -51,7 +50,7 @@ public abstract class Delivery
     */
     public void setDate(String dateformat)
     {
-        this.timeStamp=dateformat;
+        this.dateformat=dateformat;
     }
     
     /**
@@ -62,7 +61,7 @@ public abstract class Delivery
     public Delivery(int DeliveryId,String dateformate)
     {
         this.DeliveryId=DeliveryId;
-        this.timeStamp=dateformate;
+        this.dateformat=dateformate;
     }
     
     /**
@@ -71,10 +70,6 @@ public abstract class Delivery
     */
     public String toString() 
     {    
-        return "Deliver [id=" + DeliveryId + ", date=" + timeStamp; 
+        return "Deliver [id=" + DeliveryId + ", date=" + dateformat; 
     } 
-
 }
-
-
-

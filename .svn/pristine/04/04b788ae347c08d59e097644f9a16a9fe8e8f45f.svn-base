@@ -6,43 +6,17 @@ package Person;
 
 /**
  *
- * @authors 
+ * @authors Ciaran
  */
+public class Customer implements IPerson{
 
-public class Customer{
-
-
-    public static long ID = 1;
     private String Name;
     private String Address;
-    
-    public Customer(Long ID, String Name, String address) {
-        this.ID = ID;
-        this.Name = Name;
-        this.Address = Address;
-    }
-    
-    /**
-     * This method will set the name of the customer
-     * @param customerID
-     */
-    public void setID(Long customerID) {
-        this.ID = customerID;
-    }
-
-    /**
-     * This method will retrieve the customers ID
-     * @return Long Customer ID
-     */
-    public Long getID() {
-        return ID;
-    }
-    
     /**
      * This method will set the name of the customer
      * @param customerName
      */
-     
+    @Override
     public void setName(String customerName) {
         this.Name = customerName;
     }
@@ -51,7 +25,7 @@ public class Customer{
      * This method will retrieve the customers name
      * @return string Customer name
      */
-     
+    @Override
     public String getName() {
         return Name;
     }
@@ -60,7 +34,7 @@ public class Customer{
      * This method will set the customers address
      * @param customerAddress
      */
-     
+    @Override
     public void setAddres(String customerAddress) {
         this.Address = customerAddress;
     }
@@ -69,7 +43,7 @@ public class Customer{
      * @return string Customer address
      */
 
-     
+    @Override
     public String getAddress() {
         return Address;
     }
