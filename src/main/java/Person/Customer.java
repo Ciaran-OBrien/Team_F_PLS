@@ -19,6 +19,4 @@ public class Customer extends AbstractPerson{
     public String toString() {
         return "";
     }
-
-    
 }
