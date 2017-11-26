@@ -4,20 +4,18 @@
  */
 package Delivery;
 
-import Status.*;
-import Delivery.Order;
-import java.util.HashMap;
-
- /*
- * @authors Luke & Tom
+ /**
+ * Order Entity layer.
+ * All getters and setters for the class are found here
+ * @author Luke + Tom
  */
 public class Order
 {
     /**
     * This will set the values of order to ones we just retrieved
-     * @param ParcelId
-     * @param CourierId
-     * @param OrderId
+     * @param ParcelId Passed upon instantiation
+     * @param CourierId Passed upon instantiation
+     * @param OrderId Passed upon instantiation 
     */
     public Order(int ParcelId, int CourierId, long OrderId) {
         this.ParcelId = ParcelId;
@@ -67,7 +65,7 @@ public class Order
     
     /**
     * This will set the status of the parcel to the one just obtained
-    * @param Status
+    * @param Status Passed upon changes to order status
     */
 
     public void setStatus(OrderStatus Status)

@@ -4,13 +4,12 @@
  */
 package Delivery;
 
-import Delivery.OrderStatus;
-import Delivery.Order;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Order Entity Manager
+ * This class implements all the relevant CRUD Implementations
  * @author Ciarán
  */
 public class OrderManager {
@@ -19,15 +18,18 @@ public class OrderManager {
 
     private static long previousID = 0;
 
+    /**
+     * Constructor to instantiate ordersToGo Hashmap.
+     */
     public OrderManager() {
         this.ordersToGo = new HashMap();
     }
 
     /**
      * Part of CRUD. Checks if the hashMap isn't null and puts new order
-     * @param ParcelId
-     * @param CourierId
-     * @param OrderId
+     * @param ParcelId passed to be created
+     * @param CourierId passed to be created
+     * @param OrderId passed to be created
      * @return true or false for testing purposes
      */
     public boolean createOrder(int ParcelId, int CourierId, long OrderId) {
@@ -43,7 +45,7 @@ public class OrderManager {
     /**
      * Part of CRUD. Read order
      *
-     * @param orderID
+     * @param orderID passed to be found
      * @return Order from id passed
      */
     public Order findOrderByID(long orderID) {
@@ -53,8 +55,8 @@ public class OrderManager {
     /**
      * Part of CRUD. Checks if the hashMap isn't null and puts new order
      *
-     * @param OrderID
-     * @param newStatus
+     * @param OrderID passed to be updated
+     * @param newStatus passed to be updated
      * @return true or false for testing purposes
      */
     public boolean updateOrderStatus(long OrderID, OrderStatus newStatus) {
@@ -70,7 +72,7 @@ public class OrderManager {
     /**
      * Part of CRUD. Destroy based off ID passed
      *
-     * @param orderID
+     * @param orderID passed to be destroyed
      * @return true or false for testing purposes
      */
     public boolean destroyOrder(long orderID) {
