@@ -5,9 +5,11 @@
  */
 package Person;
 
-import Person.Customer;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -15,47 +17,77 @@ import java.util.Map;
  */
 public class PersonManager {
     
-    //while()
-    
-    Map<Long,AbstractPerson> persons;
+    Map<Long,Person> persons;
     
     public PersonManager(){
         this.persons = new HashMap();
     }
+    
+    // * ******************************************************************** */
+    // * ************************** CREATE ********************************** */
+    
+    public void createPerson(String name, String address){
+        Person person = new Person(name, address);
+        persons.put(person.getID(), person);
+    }
+    
+    // * ******************************************************************** */
+    // * ************************** READ ************************************ */
+    
+    
+    public Person findPersonByID (long ID){
         
-    /**
-     *
-     * @param newPerson
-     * @return
-     */
-    public boolean createPerson(AbstractPerson newPerson) {
-        if (newPerson.getStatus() == PersonStatus.SENDER) {
-            if (persons != null) {
-                persons.put(newPerson.getID(), newPerson);
-                return true;
+        Person result = persons.getOrDefault(ID, Person.getPhantom(ID));
+        
+        return persons.get(ID);
+    }
+    
+    public Collection<Person> findPersonsByStatus(PersonStatus status) {
+        Collection<Person> result = new ArrayList<>();
+
+        for (Entry<Long, Person> e : persons.entrySet()) {
+            Person c = e.getValue();
+
+            if (c.getStatus() == status) {
+                result.add(c);
             }
         }
-        return false;
+        return result;
     }
     
-    public AbstractPerson findPersonByID (long ID){
-        return persons.get(ID);       
-    }  
-    
-    public boolean updatePerson(AbstractPerson newPerson){
-        if(persons.containsKey(newPerson.getID())){
-            persons.put(newPerson.getID(), newPerson);
-            return true;
+    public Collection<Person> findPersonsByName(String nameSuffix){
+        Collection<Person> result = new ArrayList<>();
+        
+        for(Entry<Long,Person> e : persons.entrySet()){
+            Person c = e.getValue();
+            
+            if(c.getName().endsWith(nameSuffix)){
+                result.add(c);
+            }
         }
-        return false;
+        return result;
     }
+    
+    // * ******************************************************************** */
+    // * ************************** UPDATE ********************************** */
+    
+    public boolean updatePerson(Person modifiedPerson){
+
+        long personId = modifiedPerson.getID();
+        
+        if(!persons.containsKey(personId))
+            return false;
+        
+        persons.put(personId, modifiedPerson);
+        return true;
+    }
+    
+    // * ******************************************************************** */
+    // * ************************** DELETE ********************************** */
     
     public boolean destroyPerson(long ID){
-        if(persons.containsKey(ID)){
-            persons.remove(ID);
-            return true;
-        }
-        return false;
+        Person deleted = persons.remove(ID);
+        return deleted != null;
     }
     
 }
