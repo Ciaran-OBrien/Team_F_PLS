@@ -8,7 +8,7 @@ package Person;
  *
  * @author Ciaran
  */
-public abstract class AbstractPerson {
+public class Person {
 
     /**
      * Private class fields
@@ -16,35 +16,37 @@ public abstract class AbstractPerson {
     private long ID;
     private String Name;
     private String Address;
-    private PersonStatus status;
+    private PersonStatus Status;
     
-    /** Method to get PersonStatus.
-     * @return the status of the customer 
-     */
-    public PersonStatus getStatus() {
-        return status;
-    }
-
-    /** Method to set Customer Status
-     * @param status the status to set
-     */
-    public void setStatus(PersonStatus status) {
-        this.status = status;
-    }
-    
+        
     /**
      * Constructor for the Abstract Class
      * @param ID Passed in the super method of subclass
      * @param Name Passed in the super method of subclass
      * @param Address Passed in the super method of subclass
+     * @param Status
      */
-    public AbstractPerson(long ID, String Name, String Address) {
+    public Person(long ID, String Name, String Address, PersonStatus Status) {
         this.ID = ID;
         this.Name = Name;
         this.Address = Address;
+        this.Status = Status; 
     }
-   
     
+    /** Method to get PersonStatus.
+     * @return the status of the customer 
+     */
+    public PersonStatus getStatus() {
+        return Status;
+    }
+
+    /** Method to set Customer Status
+     * @param Status the Status to set
+     */
+    public void setStatus(PersonStatus Status) {
+        this.Status = Status;
+    }
+     
     /** Method to return an ID
      * @return ID of Customer or Courier
      */
@@ -92,6 +94,8 @@ public abstract class AbstractPerson {
      * @return String of details
      */
     @Override
-    public abstract String toString();
+    public String toString(){
+        return "Person details";
+    }
     
 }

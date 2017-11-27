@@ -15,7 +15,7 @@ import SystemUtil.Logger;
  */
 public class PersonManager {
        
-    Map<Long,AbstractPerson> persons;
+    Map<Long,Person> persons;
     
     public PersonManager(){
         this.persons = new HashMap();
@@ -23,10 +23,10 @@ public class PersonManager {
         
     /**
      * Method to create a new person, save to Map
-     * @param newPerson Object type Customer from AbstractPerson
+     * @param newPerson Object type Customer from Person
      * @return true or false for testing purposes
      */
-    public boolean createPerson(AbstractPerson newPerson) {
+    public boolean createPerson(Person newPerson) {
         if (newPerson.getStatus() == PersonStatus.SENDER) {
             if (persons != null) {
                 persons.put(newPerson.getID(), newPerson);
@@ -42,7 +42,7 @@ public class PersonManager {
      * @param orderID passed to be found
      * @return Object Customer from persons map
      */
-    public AbstractPerson findPersonByID (long orderID){
+    public Person findPersonByID (long orderID){
         Logger.LogMessage("Person Found");
         return persons.get(orderID);       
     }  
@@ -50,10 +50,10 @@ public class PersonManager {
     /**
      * Updates an order based of an order ID with a new order
      * @param orderID Given Order ID to be updating
-     * @param newPerson Object type Customer from AbstractPerson
+     * @param newPerson Object type Customer from Person
      * @return true or false for testing purposes
      */
-    public boolean updatePerson(long orderID, AbstractPerson newPerson){
+    public boolean updatePerson(long orderID, Person newPerson){
         
         if(persons.containsKey(orderID)){
             persons.put(orderID, newPerson);
