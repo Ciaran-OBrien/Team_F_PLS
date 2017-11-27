@@ -4,36 +4,44 @@
  */
 package Delivery;
 
-import Status.*;
-import Delivery.Order;
-
- /*
- * @authors Luke & Tom
+ /**
+ * Order Entity layer.
+ * All getters and setters for the class are found here
+ * @author Luke + Tom
  */
-public abstract class Order
+public class Order
 {
-    private int ParcelId=0;
-    private int CourierId=0;
-    private int OrderId = 0 ;
-    OrderStatus Status;
+    /**
+    * This will set the values of order to ones we just retrieved
+     * @param ParcelId Passed upon instantiation
+     * @param CourierId Passed upon instantiation
+     * @param OrderId Passed upon instantiation 
+    */
+    public Order(int ParcelId, int CourierId, long OrderId) {
+        this.ParcelId = ParcelId;
+        this.CourierId = CourierId;
+        this.OrderId = OrderId;
+    }
+  
+    private int ParcelId;
+    private int CourierId;
+    private long OrderId;
+    OrderStatus Status = OrderStatus.Registered;
+
+  
+    public int getParcelId() {
+        return ParcelId;
+    }
     
     /**
     * This method will return the parcel ID
-    * @return int This is the parcel ID
+    * @return long This is the parcel ID
     */
-    public int getOrderId()
+    public long getOrderId()
     {
         return OrderId; 
     }
-    
-     /**
-     * This method will set the parcel ID previously obtained from the last method
-     * @param OrderId
-     */
-    public void setOrderID(int OrderId)
-    {
-        this.OrderId=OrderId;
-    }
+
     
     /**
     * This method will retrieve the courier ID
@@ -43,15 +51,7 @@ public abstract class Order
     {
         return CourierId;
     }
-    
-    /**
-    * This will set the courier ID to the one we just retrieved
-     * @param CourierId
-    */
-    public void setCourierID(int CourierId)
-    {
-        this.CourierId=CourierId;
-    }
+
     
     /**
     * This will retrieve the status of the parcel
@@ -65,27 +65,12 @@ public abstract class Order
     
     /**
     * This will set the status of the parcel to the one just obtained
-    * @param Status
+    * @param Status Passed upon changes to order status
     */
 
     public void setStatus(OrderStatus Status)
 
     {
-        this.Status=Status;
-    }
-    
-    /**
-    * This will set the values of order to ones we just retrieved
-     * @param ParcelId
-     * @param CourierId
-     * @param Status
-    */
-
-    public Order(int ParcelId,int CourierId,OrderStatus Status)
-
-    {
-        this.ParcelId=ParcelId;
-        this.CourierId=CourierId;
         this.Status=Status;
     }
     

@@ -3,14 +3,13 @@
  * Lecture: Bennard Humm
  */
 package Delivery;
-import java.io.*; 
 import java.text.*; 
-import java.util.*;
 import java.util.Date;
 
 /**
- *
- * @authors Luke & Tom
+ * Delivery Entity layer.
+ * All getters and setters for the class are found here
+ * @author Luke + Tom
  */
 
 public abstract class Delivery
@@ -28,15 +27,6 @@ public abstract class Delivery
     }
     
     /**
-    * This method will set the Delivery ID
-     * @param DelivertId
-    */
-    public void setID(int DelivertId)
-    {
-        this.DeliveryId=DeliveryId;
-    }
-    
-    /**
          * This method will retrieve date
          * @return string This will be the ID number
     */
@@ -47,7 +37,7 @@ public abstract class Delivery
     
     /**
     * This method will set the date
-     * @param dateformat
+     * @param dateformat Passed to track date of delivery
     */
     public void setDate(String dateformat)
     {
@@ -56,8 +46,8 @@ public abstract class Delivery
     
     /**
     * This method will set the date and delivery ID
-     * @param DeliveryId
-     * @param dateformate
+     * @param DeliveryId Passed upon instantiation
+     * @param dateformate Passed upon instantiation
     */
     public Delivery(int DeliveryId,String dateformate)
     {
