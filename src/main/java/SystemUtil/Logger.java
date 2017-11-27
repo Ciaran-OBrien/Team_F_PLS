@@ -1,3 +1,5 @@
+package SystemUtil;
+
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -36,7 +38,7 @@ public class Logger {
     }
 
     public static void LogMessage(String logMessage) {
-        LOG.log(Level.WARNING, logMessage);
+        LOG.log(Level.INFO, logMessage);
     }
 
 }

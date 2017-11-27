@@ -6,6 +6,7 @@ package Delivery;
 
 import java.util.HashMap;
 import java.util.Map;
+import SystemUtil.Logger;
 
 /**
  * Order Entity Manager
@@ -38,6 +39,7 @@ public class OrderManager {
             return false;
         }else{
         ordersToGo.put(OrderId, newOrder);
+        Logger.LogMessage("Order Created");
         return true;
         }
     }
@@ -49,6 +51,7 @@ public class OrderManager {
      * @return Order from id passed
      */
     public Order findOrderByID(long orderID) {
+        Logger.LogMessage("Order Found");
         return ordersToGo.get(orderID);
     }
 
@@ -63,6 +66,7 @@ public class OrderManager {
         Order OrderToUpdate = findOrderByID(OrderID);
         if (ordersToGo.containsValue(OrderToUpdate.getOrderId())) {
             OrderToUpdate.setStatus(newStatus);
+            Logger.LogMessage("Order Updated");
         } else {
             throw new IllegalArgumentException("Order does not exists with id:" + OrderID);
         }
@@ -78,6 +82,7 @@ public class OrderManager {
     public boolean destroyOrder(long orderID) {
         boolean destroyed  = ordersToGo.containsKey(orderID);
         ordersToGo.remove(orderID);
+        Logger.LogMessage("Order Destroyed");
         return destroyed;
     }
 

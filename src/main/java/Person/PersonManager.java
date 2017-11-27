@@ -7,6 +7,7 @@ package Person;
 
 import java.util.HashMap;
 import java.util.Map;
+import SystemUtil.Logger;
 
 /**
  * Person Entity Manager
@@ -29,6 +30,7 @@ public class PersonManager {
         if (newPerson.getStatus() == PersonStatus.SENDER) {
             if (persons != null) {
                 persons.put(newPerson.getID(), newPerson);
+                Logger.LogMessage("Person Created");
                 return true;
             }
         }
@@ -41,6 +43,7 @@ public class PersonManager {
      * @return Object Customer from persons map
      */
     public AbstractPerson findPersonByID (long orderID){
+        Logger.LogMessage("Person Found");
         return persons.get(orderID);       
     }  
     
@@ -54,6 +57,7 @@ public class PersonManager {
         
         if(persons.containsKey(orderID)){
             persons.put(orderID, newPerson);
+            Logger.LogMessage("Person Updated");
             return true;
         }
         return false;
@@ -64,9 +68,10 @@ public class PersonManager {
      * @param orderID passed to be destroyed
      * @return true or false for testing purposes
      */
-    public boolean destroyOrder(long orderID) {
+    public boolean destroyPerson(long orderID) {
         boolean destroyed  = persons.containsKey(orderID);
         persons.remove(orderID);
+        Logger.LogMessage("Person Destroyed");
         return destroyed;
     }
 }
