@@ -5,41 +5,52 @@
  */
 package Delivery;
 
+import Person.PersonManager;
+
 /**
  *
  * @author jan
  */
 public class PacketTrackingService {
     
-    public void registerNewOrder(long senderId, long receiverId){
+    OrderManager orderManager;
+    PersonManager personManager;
+
+    public PacketTrackingService(OrderManager orderManager, 
+                                 PersonManager personManager) {
+        this.orderManager = orderManager;
+        this.personManager = personManager;
+    }
+    
+    public TrackingRecord registerNewOrder(long senderId, long receiverId){
         throw new UnsupportedOperationException("not impl");
     }
     
-    public void registerNewOrder(String newSenderName, String newReceiverName){
+    public TrackingRecord registerNewOrder(String newSenderName, String newReceiverName){
+        throw new UnsupportedOperationException("not impl");
+    }    
+    
+    public TrackingRecord incrementOrderStatus(long orderId){
         throw new UnsupportedOperationException("not impl");
     }
     
-    public String getOrderStatus(long orderId){
+    public TrackingRecord reportDeliveryProblem(long orderId){
         throw new UnsupportedOperationException("not impl");
     }
     
-    public void incrementOrderStatus(long orderId){
+    public TrackingRecord resetDevliverProcess(long orderId){
         throw new UnsupportedOperationException("not impl");
     }
     
-    public void reportDeliveryProblem(long orderId){
-        throw new UnsupportedOperationException("not impl");
-    }
-    
-    public void resetDevliverProcess(long orderId){
-        throw new UnsupportedOperationException("not impl");
-    }
-    
-    public void cancelOrderStatus(long orderId){
+    public TrackingRecord cancelOrderStatus(long orderId){
         throw new UnsupportedOperationException("not impl");
     }
     
     public String listProblematicOrders(){
+        throw new UnsupportedOperationException("not impl");
+    }
+
+    public String getOrderStatus(long orderId){
         throw new UnsupportedOperationException("not impl");
     }
 }
