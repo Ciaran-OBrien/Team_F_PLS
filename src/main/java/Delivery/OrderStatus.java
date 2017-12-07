@@ -12,25 +12,25 @@ public enum OrderStatus {
     /**
      * Default for all orders upon instantiation
      */
-    Registered,
+    REGISTERED,
     /**
      * Follows the registered status
      */
-    CompleteAndDispatched,
+    COMPLETE_AND_DISPATCHED,
     /**
      * Follows the Complete and Dispatched status
      */
-    Intransit,
+    INTRANSIT,
      /**
      * Follows the In Transit status
      */
-    Delievered,
+    DELIVERED,
      /**
      * Set from customer side if they cancel the order
      */
-    Cancelled,
+    CANCELLED,
      /**
      * Set from courier side if there's a problem delivering package
      */
-    Problem
+    PROBLEM
 }

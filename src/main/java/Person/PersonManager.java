@@ -25,9 +25,10 @@ public class PersonManager {
     // * ******************************************************************** */
     // * ************************** CREATE ********************************** */
 
-    public void createPerson(String name, String address){
+    public Person createPerson(String name, String address){
         Person person = new Person(name, address);
         persons.put(person.getID(), person);
+        return person;
     }
 
     // * ******************************************************************** */
