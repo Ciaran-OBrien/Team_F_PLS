@@ -27,11 +27,19 @@ public class PacketTrackingService {
         throw new UnsupportedOperationException("not impl");
     }
     
-    public void reportDeliveryProblem(){
+    public void reportDeliveryProblem(long orderId){
+        throw new UnsupportedOperationException("not impl");
+    }
+    
+    public void resetDevliverProcess(long orderId){
         throw new UnsupportedOperationException("not impl");
     }
     
     public void cancelOrderStatus(long orderId){
+        throw new UnsupportedOperationException("not impl");
+    }
+    
+    public String listProblematicOrders(){
         throw new UnsupportedOperationException("not impl");
     }
 }
