@@ -26,10 +26,6 @@ public class PacketTrackingService {
         throw new UnsupportedOperationException("not impl");
     }
     
-    public TrackingRecord registerNewOrder(String newSenderName, String newReceiverName){
-        throw new UnsupportedOperationException("not impl");
-    }    
-    
     public TrackingRecord incrementOrderStatus(long orderId){
         throw new UnsupportedOperationException("not impl");
     }

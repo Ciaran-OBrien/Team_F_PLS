@@ -102,6 +102,29 @@ public class Person {
     public boolean isExistingInDatabase() {
         return existingInDatabase;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + (int) (this.ID ^ (this.ID >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person other = (Person) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return true;
+    }
 }
