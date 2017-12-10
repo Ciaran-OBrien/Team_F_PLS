@@ -4,9 +4,12 @@
  */
 package Delivery;
 
+import Person.Person;
 import java.util.HashMap;
 import java.util.Map;
 import SystemUtil.Logger;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 /**
  * Order Entity Manager
@@ -15,7 +18,12 @@ import SystemUtil.Logger;
  */
 public class OrderManager {
 
+
     Map<Long, Order> ordersToGo;
+    
+    PriorityQueue<Order> orders;
+    
+    
 
     private static long previousID = 0;
 
@@ -33,14 +41,35 @@ public class OrderManager {
      * @param OrderId passed to be created
      * @return true or false for testing purposes
      */
+    public Order createOrder(Person sender, Person receiver) {
+        
+        Order newOrder = new Order(sender, receiver);
+        
+        orders.add(newOrder);
+        
+        // TODO: Check precondition: Id shall not exist yet!
+        ordersToGo.put(newOrder.getOrderId(), newOrder);
+        Logger.LogMessage("Order Created");
+        
+        return newOrder;
+    }
+    
+    /**
+     * Part of CRUD. Checks if the hashMap isn't null and puts new order
+     * @param ParcelId passed to be created
+     * @param CourierId passed to be created
+     * @param OrderId passed to be created
+     * @return true or false for testing purposes
+     */
+    @Deprecated
     public boolean createOrder(int ParcelId, int CourierId, long OrderId) {
         Order newOrder = new Order(ParcelId, CourierId, OrderId);
         if (ordersToGo.containsKey(OrderId)){
             return false;
         }else{
-        ordersToGo.put(OrderId, newOrder);
-        Logger.LogMessage("Order Created");
-        return true;
+            ordersToGo.put(OrderId, newOrder);
+            Logger.LogMessage("Order Created");
+            return true;
         }
     }
 

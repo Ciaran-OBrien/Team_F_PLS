@@ -5,7 +5,11 @@
  */
 package Delivery;
 
+import Person.Person;
+import Person.PersonFileService;
 import Person.PersonManager;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -16,41 +20,61 @@ import org.junit.Before;
  */
 public class PacketTrackingServiceTest {
     
-    private PacketTrackingService service;
+    private PacketTrackingService trackingService;
     private OrderManager orderManager;
     private PersonManager personManager;
+    private PersonFileService personFileService;
+    Map<String, Long> personsIds;
+
+    // TODO: PacketTrackingServiceTest & PersonFileServiceTest share same test data.
     
     @Before
-    public void setUp(){
+    public void setUp() {
         orderManager =  new OrderManager();
         personManager = new PersonManager();
-        service = new PacketTrackingService(orderManager, personManager);        
+        trackingService = new PacketTrackingService(orderManager, personManager); 
+        
+        personsIds = new HashMap<>();
+        Person person;
+        
+        person = personManager.createPerson("Liam", "Jumpstreet 26");
+        personsIds.put("Liam", person.getID());
+        person = personManager.createPerson("Finn", "Park Ave 42");
+        personsIds.put("Finn", person.getID());
+        person = personManager.createPerson("Kevin", "Cremona Road 23");
+        personsIds.put("Kevin", person.getID());
+        person = personManager.createPerson("Fiona", "Croftwood Drive 118");
+        personsIds.put("Fiona", person.getID());
+                
+        personFileService = new PersonFileService(personManager);
     }
     
     /**
      * Test of registerNewOrder method, of class PacketTrackingService.
      */
     @Test
-    public void testRegisterNewOrder_long_long() {
+    public void testRegisterNewOrder() {
         System.out.println("registerNewOrder");
-
         
+        long liamsId = personsIds.get("Liam");
+        long fionasId = personsIds.get("Fiona");
+        Person liam = personManager.findPersonByID(liamsId);
+        Person fiona = personManager.findPersonByID(fionasId);
         
-        fail("The test case is a prototype.");
+        TrackingRecord record = trackingService.registerNewOrder(fionasId, liamsId);
+        
+        long orderId = record.orderId;
+        
+        // Evaluate record
+        assertEquals(liamsId, record.receiverId);
+        assertEquals(fionasId, record.senderId);
+        
+        //Evaluate order
+        Order order = orderManager.findOrderByID(orderId);
+        assertEquals(fiona, order.getSender());
+        assertEquals(liam, order.getReceiver());
+        assertEquals(OrderStatus.REGISTERED, order.getStatus());
     }
-
-//    /**
-//     * Test of registerNewOrder method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testRegisterNewOrder_String_String() {
-//        System.out.println("registerNewOrder");
-//
-//        //service.registerNewOrder("Adam", "Bob");
-//        //Order actual = orderManager.
-//        
-//        fail("The test case is a prototype.");
-//    }
 
 //    /**
 //     * Test of getOrderStatus method, of class PacketTrackingService.

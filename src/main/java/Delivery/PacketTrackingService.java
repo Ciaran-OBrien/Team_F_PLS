@@ -5,6 +5,7 @@
  */
 package Delivery;
 
+import Person.Person;
 import Person.PersonManager;
 
 /**
@@ -23,7 +24,19 @@ public class PacketTrackingService {
     }
     
     public TrackingRecord registerNewOrder(long senderId, long receiverId){
-        throw new UnsupportedOperationException("not impl");
+        
+        Person sender = personManager.findPersonByID(senderId);
+        Person receiver = personManager.findPersonByID(receiverId);
+        
+        Order order = orderManager.createOrder(sender, receiver);
+        
+        TrackingRecord record = new TrackingRecord(        -1, 
+                                            order.getOrderId(), 
+                                                     senderId, 
+                                                   receiverId, 
+                                     order.getStatus().name());
+        
+        return record;
     }
     
     public TrackingRecord incrementOrderStatus(long orderId){

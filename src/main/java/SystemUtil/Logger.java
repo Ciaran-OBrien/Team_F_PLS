@@ -38,7 +38,11 @@ public class Logger {
     }
 
     public static void LogMessage(String logMessage) {
-        LOG.log(Level.INFO, logMessage);
+        // LOG.log(Level.INFO, logMessage);
+        
+        // TODO
+        
+        System.out.println(logMessage); // This is a quick hack since LOG is null.
     }
 
 }
