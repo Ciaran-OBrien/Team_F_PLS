@@ -32,6 +32,10 @@ public class OrderManager {
      */
     public OrderManager() {
         this.ordersToGo = new HashMap();
+        
+        this.orders = new PriorityQueue<Order>(
+        (a,b) -> Integer.compare(a.getStatus().ordinal(), 
+                                 b.getStatus().ordinal()));
     }
 
     /**
