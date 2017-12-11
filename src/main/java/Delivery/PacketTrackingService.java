@@ -7,6 +7,7 @@ package Delivery;
 
 import Person.Person;
 import Person.PersonManager;
+import java.util.List;
 
 /**
  *
@@ -40,26 +41,64 @@ public class PacketTrackingService {
     }
     
     public TrackingRecord incrementOrderStatus(long orderId){
-        throw new UnsupportedOperationException("not impl");
+        
+        Order order = orderManager.findOrderByID(orderId);
+        
+        OrderStatus nextStatus = order.getStatus().getNextRegular();
+        orderManager.updateOrderStatus(orderId, nextStatus);
+        
+        TrackingRecord record = new TrackingRecord(-1, order, nextStatus.name());
+        
+        return record;
     }
     
     public TrackingRecord reportDeliveryProblem(long orderId){
-        throw new UnsupportedOperationException("not impl");
+        
+        Order order = orderManager.findOrderByID(orderId);
+
+        orderManager.updateOrderStatus(orderId, OrderStatus.PROBLEM);
+        
+        TrackingRecord record = new TrackingRecord(-1, order, OrderStatus.PROBLEM.name());
+        
+        return record;
     }
     
-    public TrackingRecord resetDevliverProcess(long orderId){
-        throw new UnsupportedOperationException("not impl");
+    public TrackingRecord resetOrderStatus(long orderId){
+        
+        Order order = orderManager.findOrderByID(orderId);
+
+        orderManager.updateOrderStatus(orderId, OrderStatus.REGISTERED);
+        
+        TrackingRecord record = new TrackingRecord(-1, order, OrderStatus.REGISTERED.name());
+        
+        return record;        
     }
     
-    public TrackingRecord cancelOrderStatus(long orderId){
-        throw new UnsupportedOperationException("not impl");
+    public TrackingRecord cancelOrder(long orderId){
+        
+        Order order = orderManager.findOrderByID(orderId);
+
+        orderManager.updateOrderStatus(orderId, OrderStatus.CANCELLED);
+        
+        TrackingRecord record = new TrackingRecord(-1, order, OrderStatus.CANCELLED.name());
+        
+        return record;      
     }
     
     public String listProblematicOrders(){
-        throw new UnsupportedOperationException("not impl");
+        
+        List<Order> problematicOrders = orderManager.findOrderByStatus(OrderStatus.PROBLEM);
+        StringBuilder sb = new StringBuilder();
+        
+        problematicOrders.forEach(o -> sb.append(o.getOrderId()).append("\n"));
+        
+        return sb.toString();
     }
 
-    public String getOrderStatus(long orderId){
-        throw new UnsupportedOperationException("not impl");
+    public OrderStatus getOrderStatus(long orderId){
+        
+        Order order = orderManager.findOrderByID(orderId);
+        
+        return order.getStatus();
     }
 }

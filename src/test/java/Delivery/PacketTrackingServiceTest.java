@@ -25,6 +25,12 @@ public class PacketTrackingServiceTest {
     private PersonManager personManager;
     private PersonFileService personFileService;
     Map<String, Long> personsIds;
+    Person liam;
+    Person finn;
+    Person kevin;   
+    Person fiona;
+    Order finnKevin;
+    Order kevinFinn;
 
     // TODO: PacketTrackingServiceTest & PersonFileServiceTest share same test data.
     
@@ -37,16 +43,22 @@ public class PacketTrackingServiceTest {
         personsIds = new HashMap<>();
         Person person;
         
-        person = personManager.createPerson("Liam", "Jumpstreet 26");
-        personsIds.put("Liam", person.getID());
-        person = personManager.createPerson("Finn", "Park Ave 42");
-        personsIds.put("Finn", person.getID());
-        person = personManager.createPerson("Kevin", "Cremona Road 23");
-        personsIds.put("Kevin", person.getID());
-        person = personManager.createPerson("Fiona", "Croftwood Drive 118");
-        personsIds.put("Fiona", person.getID());
+        liam = personManager.createPerson("Liam", "Jumpstreet 26");
+        personsIds.put("Liam", liam.getID());
+        
+        finn = personManager.createPerson("Finn", "Park Ave 42");
+        personsIds.put("Finn", finn.getID());
+        
+        kevin = personManager.createPerson("Kevin", "Cremona Road 23");
+        personsIds.put("Kevin", kevin.getID());
+        
+        fiona = personManager.createPerson("Fiona", "Croftwood Drive 118");
+        personsIds.put("Fiona", fiona.getID());
                 
         personFileService = new PersonFileService(personManager);
+        
+        finnKevin = orderManager.createOrder(finn, kevin);
+        kevinFinn = orderManager.createOrder(kevin, finn);
     }
     
     /**
@@ -76,85 +88,102 @@ public class PacketTrackingServiceTest {
         assertEquals(OrderStatus.REGISTERED, order.getStatus());
     }
 
-//    /**
-//     * Test of getOrderStatus method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testGetOrderStatus() {
-//        System.out.println("getOrderStatus");
-//        long orderId = 0L;
-//        PacketTrackingService instance = null;
-//        String expResult = "";
-//        String result = instance.getOrderStatus(orderId);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getOrderStatus method, of class PacketTrackingService.
+     */
+    @Test
+    public void testRegularOrderStatuses() {
+        System.out.println("regularOrderStatuses");
+        
+        OrderStatus expected;
+        OrderStatus actual;
+        
+        long orderId = kevinFinn.getOrderId();
+        
+        expected = OrderStatus.REGISTERED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+        
+        trackingService.incrementOrderStatus(orderId);
+        expected = OrderStatus.COMPLETE_AND_DISPATCHED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+        
+        trackingService.incrementOrderStatus(orderId);
+        expected = OrderStatus.INTRANSIT;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+        
+        trackingService.incrementOrderStatus(orderId);
+        expected = OrderStatus.DELIVERED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+    }
+    
+    /**
+     * Test of getOrderStatus method, of class PacketTrackingService.
+     */
+    @Test
+    public void testProblemOrderStatus() {
+        System.out.println("exceptionalOrderStatuses");
+        
+        OrderStatus expected;
+        OrderStatus actual;
+        
+        long orderId = kevinFinn.getOrderId();
+        
+        expected = OrderStatus.REGISTERED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+        
+        trackingService.reportDeliveryProblem(orderId);
+        expected = OrderStatus.PROBLEM;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+        
+        trackingService.resetOrderStatus(orderId);
+        expected = OrderStatus.REGISTERED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+    }
+    
+    /**
+     * Test of getOrderStatus method, of class PacketTrackingService.
+     */
+    @Test
+    public void testCancelledOrderStatus() {
+        System.out.println("cancelledOrderStatus");
+        
+        OrderStatus expected;
+        OrderStatus actual;
+        
+        long orderId = kevinFinn.getOrderId();
+        
+        expected = OrderStatus.REGISTERED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+        
+        trackingService.cancelOrder(orderId);
+        expected = OrderStatus.CANCELLED;
+        actual = trackingService.getOrderStatus(orderId);
+        assertEquals(expected, actual);
+    }
 
-//    /**
-//     * Test of incrementOrderStatus method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testIncrementOrderStatus() {
-//        System.out.println("incrementOrderStatus");
-//        long orderId = 0L;
-//        PacketTrackingService instance = null;
-//        instance.incrementOrderStatus(orderId);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of listProblematicOrders method, of class PacketTrackingService.
+     */
+    @Test
+    public void testListProblematicOrders() {
+        System.out.println("listProblematicOrders");
+        
+        long orderId = kevinFinn.getOrderId();
+        
+        trackingService.reportDeliveryProblem(orderId);
 
-//    /**
-//     * Test of reportDeliveryProblem method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testReportDeliveryProblem() {
-//        System.out.println("reportDeliveryProblem");
-//        long orderId = 0L;
-//        PacketTrackingService instance = null;
-//        instance.reportDeliveryProblem(orderId);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of resetDevliverProcess method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testResetDevliverProcess() {
-//        System.out.println("resetDevliverProcess");
-//        long orderId = 0L;
-//        PacketTrackingService instance = null;
-//        instance.resetDevliverProcess(orderId);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of cancelOrderStatus method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testCancelOrderStatus() {
-//        System.out.println("cancelOrderStatus");
-//        long orderId = 0L;
-//        PacketTrackingService instance = null;
-//        instance.cancelOrderStatus(orderId);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of listProblematicOrders method, of class PacketTrackingService.
-//     */
-//    @Test
-//    public void testListProblematicOrders() {
-//        System.out.println("listProblematicOrders");
-//        PacketTrackingService instance = null;
-//        String expResult = "";
-//        String result = instance.listProblematicOrders();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+        String expected = orderId+"\n";
+        String actual = trackingService.listProblematicOrders();
+        
+        assertEquals(expected, actual);
+    }
     
 }

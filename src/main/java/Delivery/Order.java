@@ -23,10 +23,13 @@ public class Order{
     private long OrderId;
     OrderStatus Status;
     
+    private static long idCount = 0; 
+    
     public Order(Person sender, Person receiver){
         this.sender = sender;
         this.receiver = receiver;
         this.Status = OrderStatus.REGISTERED;
+        this.OrderId = ++idCount;
     }
     
     /**

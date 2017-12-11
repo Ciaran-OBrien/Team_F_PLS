@@ -35,5 +35,12 @@ public enum OrderStatus {
      /**
      * Set from courier side if there's a problem delivering package
      */
-    PROBLEM
+    PROBLEM;
+    
+    protected OrderStatus getNextRegular(){
+        
+        // TODO: Throw if there is no one.
+        
+        return OrderStatus.values()[this.ordinal() + 1];
+    }
 }

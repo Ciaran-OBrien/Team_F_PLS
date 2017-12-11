@@ -13,15 +13,27 @@ import java.time.LocalTime;
  */
 public class TrackingRecord {
 
-    public TrackingRecord(long deliveryId, 
-                          long orderId, 
-                          long senderId, 
-                          long receiverId, 
-                          String status) {
+    // TODO: needed?
+    protected TrackingRecord(long deliveryId, 
+                             long orderId, 
+                             long senderId, 
+                             long receiverId, 
+                             String status) {
         this.deliveryId = deliveryId;
         this.orderId = orderId;
         this.senderId = senderId;
         this.receiverId = receiverId;
+        this.status = status;
+        this.timeStamp = LocalTime.now();
+    }
+    
+    protected TrackingRecord(long deliveryId, 
+                             Order order,
+                             String status) {
+        this.deliveryId = deliveryId;
+        this.orderId = order.getOrderId();
+        this.senderId = order.getSender().getID();
+        this.receiverId = order.getReceiver().getID();
         this.status = status;
         this.timeStamp = LocalTime.now();
     }

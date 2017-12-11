@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import SystemUtil.Logger;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 /**
  * Order Entity Manager
@@ -87,6 +89,18 @@ public class OrderManager {
         Logger.LogMessage("Order Found");
         return ordersToGo.get(orderID);
     }
+    
+
+    public List<Order> findOrderByStatus(OrderStatus status) {
+        
+        List<Order> filtered = ordersToGo.entrySet()
+                                       .stream()
+                                       .map(entrySet -> entrySet.getValue())
+                                       .filter(order -> order.getStatus().equals(status))
+                                       .collect(Collectors.toList());
+
+        return filtered;
+    }
 
     /**
      * Part of CRUD. Checks if the hashMap isn't null and puts new order
@@ -97,7 +111,7 @@ public class OrderManager {
      */
     public boolean updateOrderStatus(long OrderID, OrderStatus newStatus) {
         Order OrderToUpdate = findOrderByID(OrderID);
-        if (ordersToGo.containsValue(OrderToUpdate.getOrderId())) {
+        if (ordersToGo.containsKey(OrderToUpdate.getOrderId())) {
             OrderToUpdate.setStatus(newStatus);
             Logger.LogMessage("Order Updated");
         } else {
